@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
-builder.Services.AddTransient<BlogRepository>();
+builder.Services.AddTransient<BlogRepo>();
 builder.Services.AddScoped<BlogService>();
 
 var app = builder.Build();

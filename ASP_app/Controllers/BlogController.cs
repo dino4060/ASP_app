@@ -1,5 +1,6 @@
 using ASP_app.Models;
 using ASP_app.Services;
+using ASP_app.Types;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ASP_app.Controllers;
@@ -9,8 +10,8 @@ namespace ASP_app.Controllers;
 public class BlogsController(BlogService blogService) : ControllerBase
 {
   [HttpGet]
-  public IEnumerable<Blog> Get([FromQuery] string? author)
+  public IEnumerable<Blog> Get([FromQuery] BlogFilter filter)
   {
-    return blogService.GetBlogs(author);
+    return blogService.GetBlogs(filter);
   }
 }
