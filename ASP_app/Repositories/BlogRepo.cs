@@ -1,5 +1,6 @@
 using ASP_app.Models;
 using ASP_app.Types;
+using static ASP_app.Helpers.FilterHelper;
 
 namespace ASP_app.Repositories;
 
@@ -19,20 +20,13 @@ public class BlogRepo
     new(3, "LINQ Thần Chưởng", "Cách filter pro", "Nhẫn", DateTime.Now.AddDays(-2), [])
   ];
 
-  public IEnumerable<Blog> GetAll(BlogFilter filter)
+  public async Task<IEnumerable<Blog>> FindAll(BlogFilter filter)
   {
-    var query = _blogs.AsEnumerable();
+    await Task.Delay(50);
 
-    if (!string.IsNullOrWhiteSpace(filter.Author))
-    {
-      query = query.Where(b => b.Author.Contains(filter.Author, StringComparison.OrdinalIgnoreCase));
-    }
-
-    if (filter.Rating.HasValue)
-    {
-      query = query.Where(b => b.AverageRating >= filter.Rating.Value);
-    }
-
-    return query;
+    return _blogs.Where(b =>
+        IsPassed(filter.Author, () => b.Author.Contains(filter.Author!, StringComparison.OrdinalIgnoreCase)) &&
+        IsPassed(filter.Rating, () => b.AverageRating >= filter.Rating!.Value)
+    );
   }
 }

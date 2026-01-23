@@ -6,8 +6,8 @@ namespace ASP_app.Services;
 
 public class BlogService(BlogRepo blogRepository)
 {
-  public IEnumerable<Blog> GetBlogs(BlogFilter filter)
+  public Task<IEnumerable<Blog>> List(BlogFilter filter)
   {
-    return blogRepository.GetAll(filter);
+    return blogRepository.FindAll(filter);
   }
 }

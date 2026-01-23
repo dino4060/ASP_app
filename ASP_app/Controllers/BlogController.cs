@@ -1,4 +1,3 @@
-using ASP_app.Models;
 using ASP_app.Services;
 using ASP_app.Types;
 using Microsoft.AspNetCore.Mvc;
@@ -10,8 +9,9 @@ namespace ASP_app.Controllers;
 public class BlogsController(BlogService blogService) : ControllerBase
 {
   [HttpGet]
-  public IEnumerable<Blog> Get([FromQuery] BlogFilter filter)
+  public async Task<ActionResult> Get([FromQuery] BlogFilter filter)
   {
-    return blogService.GetBlogs(filter);
+    var result = await blogService.List(filter);
+    return Ok(result);
   }
 }
