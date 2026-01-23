@@ -1,8 +1,12 @@
 namespace ASP_app.Models;
 
-public class Comment(string user, string content, int rating)
+public class Comment
 {
-  public string User { get; set; } = user;
-  public string Content { get; set; } = content;
-  public int Rating { get; set; } = rating;
+  public int Id { get; set; }
+  public string User { get; set; } = string.Empty;
+  public string Content { get; set; } = string.Empty;
+  public int Rating { get; set; }
+
+  public int BlogId { get; set; }
+  public Blog? Blog { get; set; }
 }
