@@ -1,11 +1,12 @@
-using ASP_app.Data;
+using ASP_app.Contexts;
 using ASP_app.Repositories;
 using ASP_app.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+var connection = builder.Configuration.GetConnectionString("DefaultConnection");
 
-builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection));
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
 builder.Services.AddTransient<BlogRepo>();
@@ -15,21 +16,20 @@ var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
-  var context = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
+  var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
   try
   {
-    // Lệnh này chỉ kiểm tra server có phản hồi hay không, không quan tâm bảng biểu
     if (await context.Database.CanConnectAsync())
     {
       Console.WriteLine("------------------------------------------");
-      Console.WriteLine("DATABASE CONNECTION: SUCCESS (Đã thông!)");
+      Console.WriteLine("DATABASE CONNECTION: SUCCESS <3");
       Console.WriteLine("------------------------------------------");
     }
   }
   catch (Exception ex)
   {
     Console.WriteLine("------------------------------------------");
-    Console.WriteLine($"DATABASE CONNECTION: FAILED!");
+    Console.WriteLine($"DATABASE CONNECTION: FAILED :((");
     Console.WriteLine($"Error: {ex.Message}");
     Console.WriteLine("------------------------------------------");
   }
