@@ -1,10 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using ASP_app.Database;
-using ASP_app.Models;
-using ASP_app.Types;
+using ASP_app.Model.Types;
 using static ASP_app.Helpers.FilterHelper;
 
-namespace ASP_app.Repositories;
+namespace ASP_app.Models.Repositories;
 
 public class BlogRepo(AppDbContext context)
 {

@@ -1,8 +1,8 @@
-using ASP_app.Services;
-using ASP_app.Types;
+using ASP_app.Application;
+using ASP_app.Model.Types;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ASP_app.Controllers;
+namespace ASP_app.API;
 
 [ApiController]
 [Route("api/[controller]")]

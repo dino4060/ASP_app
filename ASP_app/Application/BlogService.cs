@@ -1,8 +1,8 @@
 using ASP_app.Models;
-using ASP_app.Repositories;
-using ASP_app.Types;
+using ASP_app.Models.Repositories;
+using ASP_app.Model.Types;
 
-namespace ASP_app.Services;
+namespace ASP_app.Application;
 
 public class BlogService(BlogRepo blogRepository)
 {

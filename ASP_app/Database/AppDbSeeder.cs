@@ -3,7 +3,7 @@ using Bogus;
 
 namespace ASP_app.Database;
 
-public class AppDbSeeder
+public static class AppDbSeeder
 {
   private static readonly Faker _faker = new();
 
@@ -11,6 +11,7 @@ public class AppDbSeeder
   {
     Randomizer.Seed = new Random(123456);
     var Id = 1;
+
     return new Faker<Blog>("vi")
         .RuleFor(b => b.Id, f => Id++)
         .RuleFor(b => b.Title, f => f.Lorem.Sentence())
@@ -23,7 +24,9 @@ public class AppDbSeeder
   public static List<Comment> GenerateComments(List<Blog> blogs)
   {
     Randomizer.Seed = new Random(123456);
+    var faker = new Faker();
     var Id = 1;
+
     return [.. blogs.SelectMany(blog => new Faker<Comment>("vi")
           .RuleFor(c => c.Id, _ => Id++)
           .RuleFor(c => c.User, f => f.Name.FullName())

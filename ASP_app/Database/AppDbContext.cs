@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ASP_app.Models;
-using Bogus;
+using static ASP_app.Database.AppDbSeeder;
 
 namespace ASP_app.Database;
 
@@ -26,8 +26,8 @@ public class AppDbContext(DbContextOptions<AppDbContext> options, IConfiguration
   {
     base.OnModelCreating(builder);
 
-    var blogs = AppDbSeeder.GenerateBlogs();
-    var comments = AppDbSeeder.GenerateComments(blogs);
+    var blogs = GenerateBlogs();
+    var comments = GenerateComments(blogs);
 
     builder.Entity<Blog>().HasData(blogs);
     builder.Entity<Comment>().HasData(comments);
