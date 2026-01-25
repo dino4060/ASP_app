@@ -1,7 +1,7 @@
 using ASP_app.Models;
 using Bogus;
 
-namespace ASP_app.Database;
+namespace ASP_app.Config.Database;
 
 public static class AppDbSeeder
 {

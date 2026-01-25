@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using ASP_app.Database;
-using ASP_app.Model.Types;
+using ASP_app.Config.Database;
+using ASP_app.Models.Types;
 using static ASP_app.Helpers.FilterHelper;
 
 namespace ASP_app.Models.Repositories;

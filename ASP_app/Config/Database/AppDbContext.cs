@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using ASP_app.Models;
-using static ASP_app.Database.AppDbSeeder;
+using static ASP_app.Config.Database.AppDbSeeder;
 
-namespace ASP_app.Database;
+namespace ASP_app.Config.Database;
 
 public class AppDbContext(DbContextOptions<AppDbContext> options, IConfiguration config) : DbContext(options)
 {

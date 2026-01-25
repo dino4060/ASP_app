@@ -1,4 +1,4 @@
-namespace ASP_app.Model.Types;
+namespace ASP_app.Models.Types;
 
 public class BlogFilter
 {
