@@ -8,4 +8,5 @@ public class BlogData
   public string Author { get; set; } = string.Empty;
   public DateTime CreatedAt { get; set; } = DateTime.Now;
   public List<CommentData> Comments { get; set; } = [];
+  public double AverageRating { get; set; }
 }
