@@ -10,9 +10,7 @@ builder.Services.AddDbContext<AppDbContext>();
 builder.Services.AddAutoMapper(typeof(AppMapperProfile).Assembly);
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
-builder.Services
-    .AddGraphQLServer()
-    .AddQueryType<BlogQuery>();
+builder.Services.AddGraphQLServer().AddQueryType<BlogQuery>();
 builder.Services.AddTransient<BlogRepo>();
 builder.Services.AddScoped<BlogService>();
 

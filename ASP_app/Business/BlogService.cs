@@ -14,4 +14,9 @@ public class BlogService(BlogRepo blogRepo, IMapper mapper)
 
     return mapper.Map<List<BlogData>>(blogs);
   }
+
+  public async Task<List<Blog>> List2(BlogFilter filter)
+  {
+    return [.. await blogRepo.FindAll(filter)];
+  }
 }
