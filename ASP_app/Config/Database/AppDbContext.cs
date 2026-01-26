@@ -1,10 +1,13 @@
-using Microsoft.EntityFrameworkCore;
 using ASP_app.Models;
-using static ASP_app.Config.Database.AppDbSeeder;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using static ASP_app.Config.Database.DatabaseSeeder;
 
 namespace ASP_app.Config.Database;
 
-public class AppDbContext(DbContextOptions<AppDbContext> options, IConfiguration config) : DbContext(options)
+public class AppDbContext(DbContextOptions<AppDbContext> options, IConfiguration config)
+: IdentityDbContext<AppUser>(options)
 {
   public DbSet<Blog> Blogs { get; set; }
   public DbSet<Comment> Comments { get; set; }
@@ -15,7 +18,6 @@ public class AppDbContext(DbContextOptions<AppDbContext> options, IConfiguration
       return;
 
     var connectionString = config.GetConnectionString("Database");
-
     if (string.IsNullOrEmpty(connectionString))
       throw new InvalidOperationException("ConnectionStrings.Database is required in appsettings.json");
 
@@ -26,10 +28,18 @@ public class AppDbContext(DbContextOptions<AppDbContext> options, IConfiguration
   {
     base.OnModelCreating(builder);
 
-    var blogs = GenerateBlogs();
-    var comments = GenerateComments(blogs);
+    // Seed Identity Data
+    var (roles, users, userRoles) = GenerateIdentityData();
+    builder.Entity<IdentityRole>().HasData(roles);
+    builder.Entity<AppUser>().HasData(users);
+    builder.Entity<IdentityUserRole<string>>().HasData(userRoles);
 
+    // Seed Blog Data
+    var blogs = GenerateBlogs();
     builder.Entity<Blog>().HasData(blogs);
+
+    // Seed Comment Data
+    var comments = GenerateComments(blogs);
     builder.Entity<Comment>().HasData(comments);
   }
 }

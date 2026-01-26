@@ -4,6 +4,7 @@ using ASP_app.Config.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASP_app.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260126185504_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -91,59 +94,6 @@ namespace ASP_app.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "u-admin",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "STATIC_STAMP_123456",
-                            CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Email = "admin@asp.app",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "ADMIN@ASP.APP",
-                            NormalizedUserName = "TOP1SERVER",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOf6Pb8v/8VwLIDv8T6/7UfVvJqR9Z0X5Y6vX5Y6vX",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "STATIC_STAMP_123456",
-                            TwoFactorEnabled = false,
-                            UserName = "Top1Server"
-                        },
-                        new
-                        {
-                            Id = "u-host1",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "STATIC_STAMP_123456",
-                            CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Email = "host1@asp.app",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "HOST1@ASP.APP",
-                            NormalizedUserName = "HOST1",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOf6Pb8v/8VwLIDv8T6/7UfVvJqR9Z0X5Y6vX5Y6vX",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "STATIC_STAMP_123456",
-                            TwoFactorEnabled = false,
-                            UserName = "Host1"
-                        },
-                        new
-                        {
-                            Id = "u-user1",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "STATIC_STAMP_123456",
-                            CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Email = "user1@asp.app",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "USER1@ASP.APP",
-                            NormalizedUserName = "USER1",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOf6Pb8v/8VwLIDv8T6/7UfVvJqR9Z0X5Y6vX5Y6vX",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "STATIC_STAMP_123456",
-                            TwoFactorEnabled = false,
-                            UserName = "User1"
-                        });
                 });
 
             modelBuilder.Entity("ASP_app.Models.Blog", b =>
@@ -592,29 +542,6 @@ namespace ASP_app.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "r-admin",
-                            ConcurrencyStamp = "STATIC_STAMP_123456",
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
-                        },
-                        new
-                        {
-                            Id = "r-u2",
-                            ConcurrencyStamp = "STATIC_STAMP_123456",
-                            Name = "UserLevel2",
-                            NormalizedName = "USERLEVEL2"
-                        },
-                        new
-                        {
-                            Id = "r-u1",
-                            ConcurrencyStamp = "STATIC_STAMP_123456",
-                            Name = "User",
-                            NormalizedName = "USER"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -702,23 +629,6 @@ namespace ASP_app.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = "u-admin",
-                            RoleId = "r-admin"
-                        },
-                        new
-                        {
-                            UserId = "u-host1",
-                            RoleId = "r-u2"
-                        },
-                        new
-                        {
-                            UserId = "u-user1",
-                            RoleId = "r-u1"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
